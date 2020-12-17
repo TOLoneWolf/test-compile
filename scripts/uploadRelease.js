@@ -45,7 +45,7 @@ const main = async () => {
   } catch (err) {
     console.log(err);
     const { data: newRelease } = await axios.default.post(
-      "https://api.github.com/repos/TOLoneWolf/test-compile/releases",
+      `https://api.github.com/repos/${process.env.GH_REPO}/releases`,
       { tag_name: `v${version}`, name: `v${version}`, draft: true },
 
       {
