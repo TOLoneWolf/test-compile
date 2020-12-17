@@ -13,9 +13,7 @@ jobs:
     
     env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # KoalaDevs
         GH_OWNER: "TOLoneWolf"
-        # KoalaLauncher
         GH_REPO: "test-compile"
 
     steps:
