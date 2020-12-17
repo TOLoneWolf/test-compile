@@ -14,7 +14,7 @@ const stat = promisify(fs.stat);
 const deployFolder = path.resolve(__dirname, "../", "deploy");
 
 const main = async () => {
-  if (!secrets.GITHUB_TOKEN) {
+  if (!process.env.secrets.GITHUB_TOKEN) {
     console.warn("Cannot upload artifacts. No auth token provided");
     return;
   }
@@ -26,10 +26,10 @@ const main = async () => {
 
   try {
     const { data: releasesList } = await axios.default.get(
-      `https://api.github.com/repos/TOLoneWolf/test-compile/releases`,
+      `https://api.github.com/repos/${process.env.secrets.GITHUB_REPOSITORY}/releases`,
       {
         headers: {
-          Authorization: `token ${secrets.GITHUB_TOKEN}`,
+          Authorization: `token ${process.env.secrets.GITHUB_TOKEN}`,
         },
       }
     );
@@ -50,7 +50,7 @@ const main = async () => {
 
       {
         headers: {
-          Authorization: `token ${secrets.GITHUB_TOKEN}`,
+          Authorization: `token ${process.env.secrets.GITHUB_TOKEN}`,
         },
       }
     );
@@ -90,7 +90,7 @@ const main = async () => {
           headers: {
             "Content-Length": stats.size,
             "Content-Type": contentType,
-            Authorization: `token ${secrets.GITHUB_TOKEN}`,
+            Authorization: `token ${process.env.secrets.GITHUB_TOKEN}`,
           },
           maxContentLength: Infinity,
           maxBodyLength: Infinity,
