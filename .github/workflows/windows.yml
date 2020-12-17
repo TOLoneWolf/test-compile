@@ -10,13 +10,13 @@ jobs:
   build:
 
     runs-on: windows-latest
-    
     env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GH_OWNER: "TOLoneWolf"
-        GH_REPO: "test-compile"
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GH_OWNER: "TOLoneWolf"
+      GH_REPO: "test-compile"
 
     steps:
+
 
     # Checkout Code
     - uses: actions/checkout@v2
