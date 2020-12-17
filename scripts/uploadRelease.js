@@ -14,7 +14,7 @@ const stat = promisify(fs.stat);
 const deployFolder = path.resolve(__dirname, "../", "deploy");
 
 const main = async () => {
-  if (!process.env.GH_ACCESS_TOKEN_RELEASES) {
+  if (!secrets.GITHUB_TOKEN) {
     console.warn("Cannot upload artifacts. No auth token provided");
     return;
   }
@@ -29,7 +29,7 @@ const main = async () => {
       `https://api.github.com/repos/KoalaDevs/KoalaLauncher/releases`,
       {
         headers: {
-          Authorization: `token ${process.env.GH_ACCESS_TOKEN_RELEASES}`,
+          Authorization: `token ${secrets.GITHUB_TOKEN}`,
         },
       }
     );
@@ -50,7 +50,7 @@ const main = async () => {
 
       {
         headers: {
-          Authorization: `token ${process.env.GH_ACCESS_TOKEN_RELEASES}`,
+          Authorization: `token ${secrets.GITHUB_TOKEN}`,
         },
       }
     );
@@ -90,7 +90,7 @@ const main = async () => {
           headers: {
             "Content-Length": stats.size,
             "Content-Type": contentType,
-            Authorization: `token ${process.env.GH_ACCESS_TOKEN_RELEASES}`,
+            Authorization: `token ${secrets.GITHUB_TOKEN}`,
           },
           maxContentLength: Infinity,
           maxBodyLength: Infinity,
