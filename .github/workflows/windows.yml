@@ -12,6 +12,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
+
+    # Checkout Code
+    - uses: actions/checkout@v2
       
     # Upload Artifacts
     - name: Upload Build Artifact
