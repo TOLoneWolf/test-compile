@@ -13,12 +13,17 @@ jobs:
 
     steps:
 
-    # Upload Artifacts
-    - name: Upload Build Artifact
+    # Checkout Code
+    - name: Checkout code
+      uses: actions/checkout@v2
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GH_REPO: ${{ secrets.GITHUB_REPOSITORY }}
+
+    # Upload Artifacts
+    - name: Upload Build Artifact
       uses: actions/upload-artifact@v2
       with:
         name: KoalaLauncher-win32
         path: D:\a\${{ env.GH_REPO }}\deploy
+
