@@ -10,17 +10,17 @@ jobs:
   build:
 
     runs-on: windows-latest
+    
+    env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_OWNER: "TOLoneWolf"
+        GH_REPO: "test-compile"
 
     steps:
 
     # Upload Artifacts
     - name: Upload Build Artifact
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GH_REPO: ${{ secrets.GITHUB_REPOSITORY }}
-        OWNER: ${{ github.context.repo.owner }}
-        REPO: ${{ github.context.repo.repo }}
       uses: actions/upload-artifact@v2
       with:
         name: KoalaLauncher-win32
-        path: D:\a\${{ env.GH_REPO }}\deploy
+        path: D:\a\${{ env.GH_OWNER }}\${{ env.GH_REPO }}\deploy
