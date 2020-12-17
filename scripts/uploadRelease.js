@@ -26,7 +26,7 @@ const main = async () => {
 
   try {
     const { data: releasesList } = await axios.default.get(
-      `https://api.github.com/repos/${process.env.GH_REPO}/releases`,
+      `https://api.github.com/repos/${process.env.GH_OWNER}/${process.env.GH_REPO}/releases`,
       {
         headers: {
           Authorization: `token ${process.env.GH_TOKEN}`,
