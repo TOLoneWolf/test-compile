@@ -21,4 +21,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: KoalaLauncher-win32
-        path: D:\a\$env.GH_REPO\deploy
+        path: D:\a\${{ env.GH_REPO }}\deploy
