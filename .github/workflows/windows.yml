@@ -13,9 +13,6 @@ jobs:
 
     steps:
 
-    # Checkout Code
-    - uses: actions/checkout@v2
-      
     # Upload Artifacts
     - name: Upload Build Artifact
       env:
@@ -25,16 +22,3 @@ jobs:
       with:
         name: KoalaLauncher-win32
         path: D:\a\${GH_REPO}\deploy
-
-    # Send Webhook Notification
-    - name: Send Webhook Notification
-    - uses: actions/setup-ruby@v1
-      env:
-        JOB_STATUS: ${{ job.status }}
-        WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-        HOOK_OS_NAME: ${{ runner.os }}
-        WORKFLOW_NAME: ${{ github.workflow }}
-      run: |
-        git clone https://github.com/KoalaDevs/github-actions-discord-webhook.git webhook
-        bash webhook/send.sh $JOB_STATUS $WEBHOOK_URL
-      shell: bash
