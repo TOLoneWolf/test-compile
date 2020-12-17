@@ -10,83 +10,17 @@ jobs:
   build:
 
     runs-on: windows-latest
+    
     env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      GH_OWNER: "TOLoneWolf"
-      GH_REPO: "test-compile"
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_OWNER: "TOLoneWolf"
+        GH_REPO: "test-compile"
 
     steps:
 
-
-    # Checkout Code
-    - uses: actions/checkout@v2
-
-    # Set Node Version
-    - name: Set Node Version
-      uses: actions/setup-node@v1
-      with:
-        node-version: '14.8.0'
-
-    # Set Python Version
-    - name: Set Python Version
-      run: npm config set python python2.7
-
-    # Install Node Tools
-    - name: Install Node Tools
-      run: npm install --global --production --vs2015 windows-build-tools@4.0.0
-
-    # Install Node GYP
-    - name: Install Node GYP
-      run: npm install --global node-gyp@latest
-
-    # Set Node MSVC Version
-    - name: Set Node MSVC Version
-      run: npm config set msvs_version 2015
-
-    # Increase Yarn Timeout due to Azure Timing It Out
-    - name: Increase Yarn Timeout
-      run: yarn --network-timeout 100000
-
-    # Fetch Dependencies
-    - name: Fetch Dependencies
-      run: yarn
-
-    # Build Launcher
-    - name: Build Launcher
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GH_REPO: ${{ secrets.GITHUB_REPOSITORY }}
-        RELEASE_TESTING: true
-      run: yarn release
-
-    # Upload Release if Needed
-    - name: Upload Release
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GH_REPO: ${{ secrets.GITHUB_REPOSITORY }}
-      run: yarn upload
-      
     # Upload Artifacts
     - name: Upload Build Artifact
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GH_REPO: ${{ secrets.GITHUB_REPOSITORY }}
-        OWNER: ${{ github.context.repo.owner }}
-        REPO: ${{ github.context.repo.repo }}
       uses: actions/upload-artifact@v2
       with:
         name: KoalaLauncher-win32
         path: D:\a\${{ env.GH_OWNER }}\${{ env.GH_REPO }}\deploy
-
-    # Send Webhook Notification
-    - name: Send Webhook Notification
-    - uses: actions/setup-ruby@v1
-      env:
-        JOB_STATUS: ${{ job.status }}
-        WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-        HOOK_OS_NAME: ${{ runner.os }}
-        WORKFLOW_NAME: ${{ github.workflow }}
-      run: |
-        git clone https://github.com/KoalaDevs/github-actions-discord-webhook.git webhook
-        bash webhook/send.sh $JOB_STATUS $WEBHOOK_URL
-      shell: bash
