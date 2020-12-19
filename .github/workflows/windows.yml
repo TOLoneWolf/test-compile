@@ -15,7 +15,7 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # GH_OWNER: "TOLoneWolf"
       GH_OWNER: ${{ github.repository_owner }}
-      GH_REPO: "test-compile"
+      # GH_REPO: "test-compile"
       GH_REPO: ${{ github.repository_owner[github.repository_owner.length + 1] }}
 
     steps:
@@ -64,7 +64,7 @@ jobs:
     #   uses: warrenbuckley/Setup-MSBuild@v1
 
 
-    
+
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
       # with:
