@@ -21,6 +21,8 @@ jobs:
     # Checkout Code
     - uses: actions/checkout@v2
 
+    - uses: c-hive/gha-npm-cache@v1
+
     # - name: Setup VS2019
     #   uses: warrenbuckley/Setup-MSBuild@v1
     - name: Add msbuild to PATH
@@ -29,7 +31,7 @@ jobs:
       #   vs-version: '[16.*]'
     
     # https://github.com/marketplace/actions/setup-python
-    - name: Set Node Version
+    - name: Set Python Version
       uses: actions/setup-python@v2
       with:
         python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
