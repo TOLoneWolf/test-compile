@@ -15,8 +15,8 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # GH_OWNER: "TOLoneWolf"
       GH_OWNER: ${{ github.repository_owner }}
-      # GH_REPO: "test-compile"
-      GH_REPO: ${{ github.repository_owner[github.repository_owner.length + 1] }}
+      GH_REPO: "test-compile"
+      # GH_REPO: ${{ github.repository_owner[github.repository_owner.length + 1] }}
 
     steps:
 
@@ -48,7 +48,7 @@ jobs:
 
 
     # - uses: c-hive/gha-npm-cache@v1
-    - uses: egordm/gha-yarn-node-cache@v1
+    # - uses: egordm/gha-yarn-node-cache@v1
 
 
 
@@ -71,10 +71,10 @@ jobs:
       #   vs-version: '[16.*]'
     
     # https://github.com/marketplace/actions/setup-python
-    - name: Set Python Version
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+    # - name: Set Python Version
+    #   uses: actions/setup-python@v2
+    #   with:
+    #     python-version: '3.x' # Version range or exact version of a Python version to use, using SemVer's version range syntax
         # architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
 
     # - name: MSBuild
@@ -100,8 +100,8 @@ jobs:
       run: npm install --global node-gyp@latest
 
     # Set Node MSVC Version
-    - name: Set Node MSVC Version
-      run: npm config set msvs_version 2019
+    # - name: Set Node MSVC Version
+    #   run: npm config set msvs_version 2019
 
     # Increase Yarn Timeout due to Azure Timing It Out
     - name: Increase Yarn Timeout
